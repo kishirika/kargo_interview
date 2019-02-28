@@ -1,0 +1,133 @@
+  Shipper
+  - Id
+  - Name
+  - Phone
+  - Email
+  - Address
+  - Job List
+  
+  Transporter
+  - Id 
+  - Name
+  - Phone
+  - Email
+  - Address
+  - Transportation List
+  - Rating
+  - Bid List
+  - Job List
+  
+  
+  Job
+  - Id
+  - Title
+  - Description
+  - Origin
+  - Destination
+  - Shipper
+  - Bid List
+  - Transporter
+  - Ship Date
+  - Budget
+  - Status (show, on_process, finished, expired, closed)
+  - End Job Posted
+  
+  
+  job description status :
+  - show (appear in marketplace)
+  - on_process (transporter selected and currently in progress)
+  - finished 
+  - expired (until the end of job posted, there are no bidder or transporter selected)
+  - closed (shipper choose to not continue the job)
+  
+  
+  Bid 
+  - Id
+  - Transporter Id
+  - Comment
+  - Price
+  - Status (active, inactive)
+  
+  
+  Pseudocode
+  
+  Collections.sort(collection_name, comparator);
+  
+  Create Comparators for sorting Bid (for Shipper) : 
+  
+	getBidComparatorByTransporterRating(type) {
+	  comparator = transporter1.rating - transporter2.rating;
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+	
+	getBidComparatorByBidPrice(type) {
+	  comparator = price1 - price2;
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+	
+	getBidComparatorByTransporterName(type) {
+	  comparator = transporter1.name.compareTo(transporter2.name);
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+  
+  Create Comparators for sorting Job (for Transporter):
+  
+	getJobComparatorByShipDate(type) {
+	  comparator = job1.shipDate.compareTo(job2.shipDate);
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+	
+	getJobComparatorByOrigin(type){
+	  comparator = job1.origin.compareTo(job2.origin);
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+	
+	getJobComparatorByDestination(type) {
+	  comparator = job1.destination.compareTo(job2.destination);
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+	
+	getJobComparatorByBudget(type) {
+	  comparator = job1.budget - job2.budget;
+	  if(type == ascending) {
+		return comparator;
+	  } else {
+		return comparator * -1;
+	  }
+	}
+  
+  
+  Planning
+  
+  1. Create class Shipper
+  2. Create class Transporter
+  3. Create class Job
+  4. Create class Bid
+  5. Create job comparator in shipper job bidder page(by rating, by price, by transporter name)
+  6. Create job comparator in transporter job page(by origin, by destination, by ship date, by budget)
+  7. Create unit test to make sure job sorted correctly based on selected criteria (eg by price descending)
+  8. Create unit test to make sure bid sorted correctly based on selected criteria (eg by transporter rating) 
